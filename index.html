@@ -2,22 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Simple jQuery Terminal</title>
+  <title>Hacker Terminal</title>
 
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <!-- jQuery Terminal -->
   <link href="https://cdn.jsdelivr.net/npm/jquery.terminal/css/jquery.terminal.min.css" rel="stylesheet"/>
   <script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/jquery.terminal.min.js"></script>
 
+  <!-- Hacker Style -->
   <style>
     html, body {
       height: 100%;
       margin: 0;
-      background: #000;
+      background: #000; /* Pure black */
+      font-family: 'Courier New', monospace;
     }
+
     #terminal {
       height: 100%;
+    }
+
+    .terminal {
+      --color: #33ff33;          /* Terminal text color */
+      --background: #000000;     /* Background color */
+      --prompt-color: #33ff33;   /* Prompt (>>> or >) */
+      --command-color: #00ff00;  /* Command input color */
+      --link-color: #00ffcc;     /* If any links */
+      --font: 'Courier New', monospace;
+      --font-size: 18px;
     }
   </style>
 </head>
@@ -27,20 +41,39 @@
   <script>
     $(function() {
       $('#terminal').terminal(function(command) {
-        if (command === 'hello') {
-          this.echo('Hello, world!');
-        } else if (command === 'help') {
-          this.echo('Available commands: hello, help, clear');
-        } else if (command === '') {
-          // Do nothing on empty input
-        } else {
-          this.echo('Unknown command: ' + command);
+        command = command.trim().toLowerCase();
+        switch (command) {
+          case 'hello':
+            this.echo('👋 Hello, operator.');
+            break;
+          case 'help':
+            this.echo([
+              'Available commands:',
+              '  hello   - Say hello',
+              '  help    - Show this help message',
+              '  clear   - Clear the screen'
+            ].join('\n'));
+            break;
+          case '':
+            // ignore empty command
+            break;
+          default:
+            this.echo(`Unknown command: "${command}"`);
         }
       }, {
-        greetings: 'Welcome to jQuery Terminal!\nType "help" to see available commands.',
-        name: 'simple_terminal',
+        greetings: [
+          '██████╗░░█████╗░░█████╗░███████╗██╗░░██╗███████╗██████╗░',
+          '██╔══██╗██╔══██╗██╔══██╗██╔════╝██║░██╔╝██╔════╝██╔══██╗',
+          '██████╦╝██║░░██║██║░░██║█████╗░░█████═╝░█████╗░░██████╦╝',
+          '██╔══██╗██║░░██║██║░░██║██╔══╝░░██╔═██╗░██╔══╝░░██╔══██╗',
+          '██████╦╝╚█████╔╝╚█████╔╝███████╗██║░╚██╗███████╗██████╦╝',
+          '╚═════╝░░╚════╝░░╚════╝░╚══════╝╚═╝░░╚═╝╚══════╝╚═════╝░',
+          '',
+          'Type "help" to see available commands.'
+        ].join('\n'),
+        name: 'hacker_terminal',
         height: '100%',
-        prompt: '>>> '
+        prompt: '> '
       });
     });
   </script>
