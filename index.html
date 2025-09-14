@@ -1,40 +1,95 @@
-$(function() {
-  const term = $('#terminal').terminal(function(command) {
-    command = command.trim().toLowerCase();
-    switch (command) {
-      case 'hello':
-        this.echo('👋 Hello, operator.');
-        break;
-      case 'help':
-        this.echo([
-          'Available commands:',
-          '  hello   - Say hello',
-          '  help    - Show this help message',
-          '  clear   - Clear the screen'
-        ].join('\n'));
-        break;
-      case '':
-        break;
-      default:
-        this.echo(`Unknown command: "${command}"`);
-    }
-  }, {
-    greetings: [
-      '██████╗░░█████╗░░█████╗░███████╗██╗░░██╗███████╗██████╗░',
-      '██╔══██╗██╔══██╗██╔══██╗██╔════╝██║░██╔╝██╔════╝██╔══██╗',
-      '██████╦╝██║░░██║██║░░██║█████╗░░█████═╝░█████╗░░██████╦╝',
-      '██╔══██╗██║░░██║██║░░██║██╔══╝░░██╔═██╗░██╔══╝░░██╔══██╗',
-      '██████╦╝╚█████╔╝╚█████╔╝███████╗██║░╚██╗███████╗██████╦╝',
-      '╚═════╝░░╚════╝░░╚════╝░╚══════╝╚═╝░░╚═╝╚══════╝╚═════╝░',
-      '',
-      'Type "help" to see available commands.'
-    ].join('\n'),
-    name: 'hacker_terminal',
-    height: '100%',
-    prompt: '> '
-  });
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hacker Terminal Startup</title>
 
-  // 🟢 Run commands automatically
-  term.exec('hello');
-  term.exec('help');
-});
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- jQuery Terminal -->
+  <link href="https://cdn.jsdelivr.net/npm/jquery.terminal/css/jquery.terminal.min.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/jquery.terminal.min.js"></script>
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background-color: #000;
+      font-family: 'Courier New', monospace;
+    }
+
+    #terminal {
+      height: 100%;
+    }
+
+    .terminal {
+      --color: #33ff33;
+      --background: #000000;
+      --prompt-color: #33ff33;
+      --command-color: #00ff00;
+      --font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal"></div>
+
+  <script>
+    $(function() {
+      const term = $('#terminal').terminal(function(command) {
+        command = command.trim().toLowerCase();
+        switch (command) {
+          case 'hello':
+            this.echo('👋 Hello, operator.');
+            break;
+          case 'status':
+            this.echo('System status: ALL SYSTEMS OPERATIONAL');
+            break;
+          case 'help':
+            this.echo([
+              'Available commands:',
+              '  hello   - Say hello',
+              '  status  - Show system status',
+              '  clear   - Clear the screen',
+              '  help    - Show this help message'
+            ].join('\n'));
+            break;
+          default:
+            this.echo(`Unknown command: "${command}"`);
+        }
+      }, {
+        greetings: '',  // We'll simulate greetings manually
+        name: 'startup_terminal',
+        height: '100%',
+        prompt: '> ',
+        enabled: false  // Disable input during boot
+      });
+
+      // Simulated startup script
+      const bootSequence = [
+        { delay: 500, text: 'Initializing system...' },
+        { delay: 1000, text: 'Loading modules: [██████████] 100%' },
+        { delay: 1000, text: 'Starting services...' },
+        { delay: 800,  text: 'Network interface up' },
+        { delay: 700,  text: 'Verifying security policies...' },
+        { delay: 1000, text: 'Welcome, operator.\nType "help" to get started.' }
+      ];
+
+      let totalDelay = 0;
+      bootSequence.forEach(entry => {
+        totalDelay += entry.delay;
+        setTimeout(() => {
+          term.echo(entry.text);
+        }, totalDelay);
+      });
+
+      // Enable input and run auto command after boot
+      setTimeout(() => {
+        term.enable();
+        term.exec('status', false); // run "status" silently on boot
+      }, totalDelay + 500);
+    });
+  </script>
+</body>
+</html>
