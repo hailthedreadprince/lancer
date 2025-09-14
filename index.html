@@ -1,9 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple jQuery Terminal</title>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- jQuery Terminal -->
+  <link href="https://cdn.jsdelivr.net/npm/jquery.terminal/css/jquery.terminal.min.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/jquery.terminal.min.js"></script>
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #000;
+    }
+    #terminal {
+      height: 100%;
+    }
+  </style>
+</head>
 <body>
+  <div id="terminal"></div>
 
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
-
+  <script>
+    $(function() {
+      $('#terminal').terminal(function(command) {
+        if (command === 'hello') {
+          this.echo('Hello, world!');
+        } else if (command === 'help') {
+          this.echo('Available commands: hello, help, clear');
+        } else if (command === '') {
+          // Do nothing on empty input
+        } else {
+          this.echo('Unknown command: ' + command);
+        }
+      }, {
+        greetings: 'Welcome to jQuery Terminal!\nType "help" to see available commands.',
+        name: 'simple_terminal',
+        height: '100%',
+        prompt: '>>> '
+      });
+    });
+  </script>
 </body>
 </html>
