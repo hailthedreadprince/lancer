@@ -1,4 +1,4 @@
-$('body').terminal(function(command, term) {
+$('#terminal').terminal(function(command, term) {
     const cmd = $.terminal.parse_command(command);
 
     if (cmd.name === 'play') {
