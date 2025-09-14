@@ -1,81 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Hacker Terminal</title>
-
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-  <!-- jQuery Terminal -->
-  <link href="https://cdn.jsdelivr.net/npm/jquery.terminal/css/jquery.terminal.min.css" rel="stylesheet"/>
-  <script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/jquery.terminal.min.js"></script>
-
-  <!-- Hacker Style -->
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      background: #000; /* Pure black */
-      font-family: 'Courier New', monospace;
+$(function() {
+  const term = $('#terminal').terminal(function(command) {
+    command = command.trim().toLowerCase();
+    switch (command) {
+      case 'hello':
+        this.echo('👋 Hello, operator.');
+        break;
+      case 'help':
+        this.echo([
+          'Available commands:',
+          '  hello   - Say hello',
+          '  help    - Show this help message',
+          '  clear   - Clear the screen'
+        ].join('\n'));
+        break;
+      case '':
+        break;
+      default:
+        this.echo(`Unknown command: "${command}"`);
     }
+  }, {
+    greetings: [
+      '██████╗░░█████╗░░█████╗░███████╗██╗░░██╗███████╗██████╗░',
+      '██╔══██╗██╔══██╗██╔══██╗██╔════╝██║░██╔╝██╔════╝██╔══██╗',
+      '██████╦╝██║░░██║██║░░██║█████╗░░█████═╝░█████╗░░██████╦╝',
+      '██╔══██╗██║░░██║██║░░██║██╔══╝░░██╔═██╗░██╔══╝░░██╔══██╗',
+      '██████╦╝╚█████╔╝╚█████╔╝███████╗██║░╚██╗███████╗██████╦╝',
+      '╚═════╝░░╚════╝░░╚════╝░╚══════╝╚═╝░░╚═╝╚══════╝╚═════╝░',
+      '',
+      'Type "help" to see available commands.'
+    ].join('\n'),
+    name: 'hacker_terminal',
+    height: '100%',
+    prompt: '> '
+  });
 
-    #terminal {
-      height: 100%;
-    }
-
-    .terminal {
-      --color: #33ff33;          /* Terminal text color */
-      --background: #000000;     /* Background color */
-      --prompt-color: #33ff33;   /* Prompt (>>> or >) */
-      --command-color: #00ff00;  /* Command input color */
-      --link-color: #00ffcc;     /* If any links */
-      --font: 'Courier New', monospace;
-      --font-size: 18px;
-    }
-  </style>
-</head>
-<body>
-  <div id="terminal"></div>
-
-  <script>
-    $(function() {
-      $('#terminal').terminal(function(command) {
-        command = command.trim().toLowerCase();
-        switch (command) {
-          case 'hello':
-            this.echo('👋 Hello, operator.');
-            break;
-          case 'help':
-            this.echo([
-              'Available commands:',
-              '  hello   - Say hello',
-              '  help    - Show this help message',
-              '  clear   - Clear the screen'
-            ].join('\n'));
-            break;
-          case '':
-            // ignore empty command
-            break;
-          default:
-            this.echo(`Unknown command: "${command}"`);
-        }
-      }, {
-        greetings: [
-          '██████╗░░█████╗░░█████╗░███████╗██╗░░██╗███████╗██████╗░',
-          '██╔══██╗██╔══██╗██╔══██╗██╔════╝██║░██╔╝██╔════╝██╔══██╗',
-          '██████╦╝██║░░██║██║░░██║█████╗░░█████═╝░█████╗░░██████╦╝',
-          '██╔══██╗██║░░██║██║░░██║██╔══╝░░██╔═██╗░██╔══╝░░██╔══██╗',
-          '██████╦╝╚█████╔╝╚█████╔╝███████╗██║░╚██╗███████╗██████╦╝',
-          '╚═════╝░░╚════╝░░╚════╝░╚══════╝╚═╝░░╚═╝╚══════╝╚═════╝░',
-          '',
-          'Type "help" to see available commands.'
-        ].join('\n'),
-        name: 'hacker_terminal',
-        height: '100%',
-        prompt: '> '
-      });
-    });
-  </script>
-</body>
-</html>
+  // 🟢 Run commands automatically
+  term.exec('hello');
+  term.exec('help');
+});
