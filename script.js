@@ -16,6 +16,6 @@ $('#terminal').terminal(function(command, term) {
     greetings: startup.innerHTML,
     onInit: function(term) {
         //run after term initializes
-        term.exec('startup potato potato')
+        //term.exec('startup potato potato')
     }
 });
