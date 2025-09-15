@@ -27,6 +27,8 @@ $('#terminal').terminal(function(command, term) {
                 term.echo("2. View remote connections");
                 term.echo("3. View diagnostics");
             }
+        },{
+            prompt: '>'
         })
     } else if (cmd.name === 'progress'){
         var time = cmd.args[0];
