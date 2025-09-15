@@ -14,14 +14,14 @@ $('#terminal').terminal(function(command, term) {
                 term.echo("selected option 1");
                 term.pop();
             } else if (selection === '2'){
-                term.echo("option 2")
+                term.echo("option 2");
                 term.pop();
             } else if (selection ==='3'){
-                term.echo("Option 3")
+                term.echo("Option 3");
                 term.pop();
             } else {
-                term.clear()
-                term.echo("Invalid Selection")
+                term.clear();
+                term.echo("Invalid Selection");
             }
         })
     } else if (cmd.name === 'progress'){
