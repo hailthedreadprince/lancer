@@ -22,11 +22,15 @@ $('#terminal').terminal(function(command, term) {
             } else {
                 term.clear();
                 term.echo("Invalid Selection");
+                term.echo("Select Task");
+                term.echo("1. View operations");
+                term.echo("2. View remote connections");
+                term.echo("3. View diagnostics");
             }
         })
     } else if (cmd.name === 'progress'){
-        var time = cmd.args[0]
-        var width = cmd.args[1]
+        var time = cmd.args[0];
+        var width = cmd.args[1];
         
     } else {
         term.echo(`Unknown command: ${cmd.name}`);
@@ -36,6 +40,6 @@ $('#terminal').terminal(function(command, term) {
     greetings: startup.innerHTML,
     onInit: function(term) {
         //run after term initializes
-        term.exec('startup potato potato')
+        term.exec('startup', {silent:true});
     }
 });
