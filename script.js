@@ -3,7 +3,8 @@ $('#terminal').terminal(function(command, term) {
 
     if (cmd.name === 'startup') {
         //TODO add startup animation
-
+        
+    }else if (cmd.name === 'mainMenu'){
         term.clear();
         term.echo("Select Task");
         term.echo("1. View operations");
