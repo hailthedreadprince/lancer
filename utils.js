@@ -1,4 +1,5 @@
 function selectFromList(term, prompt, options, ascii=""){
+    return new Promise((resolve) =>{
     term.clear()
     if (ascii!=''){
         term.echo(ascii);
@@ -21,7 +22,7 @@ function selectFromList(term, prompt, options, ascii=""){
             term.echo('[[;Red;]Invalid Selection]');
         } else if(options.length>=select && select>0){
             term.pop();
-            return(select);
+            resolve(select);
         } else{
             term.clear()
             if (ascii!=''){
@@ -35,5 +36,6 @@ function selectFromList(term, prompt, options, ascii=""){
         }
     },{
         prompt:'>'
+    })
     })
 }
