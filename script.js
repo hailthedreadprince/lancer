@@ -3,34 +3,10 @@ $('#terminal').terminal(function(command, term) {
 
     if (cmd.name === 'startup') {
         //TODO add startup animation
-        
+
     }else if (cmd.name === 'mainMenu'){
-        term.clear();
-        term.echo("Select Task");
-        term.echo("1. View operations");
-        term.echo("2. View remote connections");
-        term.echo("3. View diagnostics");
-        term.push(function(selection) {
-            if (selection === '1'){
-                term.echo("selected option 1");
-                term.pop();
-            } else if (selection === '2'){
-                term.echo("option 2");
-                term.pop();
-            } else if (selection ==='3'){
-                term.echo("Option 3");
-                term.pop();
-            } else {
-                term.clear();
-                term.echo("Invalid Selection");
-                term.echo("Select Task");
-                term.echo("1. View operations");
-                term.echo("2. View remote connections");
-                term.echo("3. View diagnostics");
-            }
-        },{
-            prompt: '>'
-        })
+        task = selectFromList("Select Tast", ["1. View operations", "2. View remote connections", "3. View diagnostics"]);
+        term.echo(task);
     } else if (cmd.name === 'progress'){
         var time = cmd.args[0];
         var width = cmd.args[1];
