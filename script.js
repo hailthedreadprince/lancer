@@ -5,7 +5,7 @@ $('#terminal').terminal(function(command, term) {
         //TODO add startup animation
 
     }else if (cmd.name === 'mainMenu'){
-        task = selectFromList("Select Tast", ["1. View operations", "2. View remote connections", "3. View diagnostics"]);
+        task = selectFromList(term, "Select Tast", ["1. View operations", "2. View remote connections", "3. View diagnostics"]);
         term.echo(task);
     } else if (cmd.name === 'progress'){
         var time = cmd.args[0];
