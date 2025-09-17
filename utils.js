@@ -5,7 +5,7 @@ function selectFromList(term, prompt, options, ascii=""){
     }
     term.echo(prompt)
     for (i in options){
-        term.echo(i);
+        term.echo(options[i]);
     }
     term.push(function(selection){
         select= parseInt(selection);
