@@ -12,11 +12,12 @@ $('#terminal').terminal(async function(command, term) {
             op = await selectFromList(term, "Select Operation", ["1. Operation Communism"])
             if (op===1){
                 //Operation Communism
+                term.echo(operationCommunism.innerHTML);
 
             }else{term.echo("ERROR")}
         }else if (task===2){
             //Remote connections
-            connection= await selectFromList(term, `Id | Netid      |  State  |                   ip                    |           Location           |`, [`1  |Prison      |  ESTAB  | 04e8:dabf:f486:c83e:7dd0:3673:a969:390c |           Unknown            |
+            connection= await selectFromList(term, `Id | Netid      |  State  |                   ip                    |           Location           |`, [`1  |Prison      |  `+`[[;4BB542;]ESTAB`+`  | 04e8:dabf:f486:c83e:7dd0:3673:a969:390c |           Unknown            |
 `]);
         }else if (task===3){
             //Mechs
