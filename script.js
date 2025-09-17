@@ -17,7 +17,7 @@ $('#terminal').terminal(async function(command, term) {
             }else{term.echo("ERROR")}
         }else if (task===2){
             //Remote connections
-            connection= await selectFromList(term, `Id | Netid      |  State  |                   ip                    |           Location           |`, [`1  |Prison      |  `+`[[;4BB542;]ESTAB`+`  | 04e8:dabf:f486:c83e:7dd0:3673:a969:390c |           Unknown            |
+            connection= await selectFromList(term, `Id | Netid      |  State  |                   ip                    |           Location           |`, [`1  |Prison      |  `+`[[;059e2e;]ESTAB`+`  | 04e8:dabf:f486:c83e:7dd0:3673:a969:390c |           Unknown            |
 `]);
         }else if (task===3){
             //Mechs
