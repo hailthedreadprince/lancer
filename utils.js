@@ -16,7 +16,7 @@ function selectFromList(term, prompt, options, ascii=""){
             }
             term.echo(prompt);
             for (i in options){
-                term.echo(i);
+                term.echo(options[i]);
             }
             term.echo('[[;Red;]Invalid Selection]');
         } else if(options.length>=select && select>0){
@@ -29,7 +29,7 @@ function selectFromList(term, prompt, options, ascii=""){
             }
             term.echo(prompt)
             for (i in options){
-                term.echo(i);
+                term.echo(options[i]);
             }
             term.echo('[[;Red;]Invalid Selection]');
         }
