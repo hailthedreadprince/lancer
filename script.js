@@ -21,13 +21,11 @@ $('#terminal').terminal(async function(command, term) {
 `]);
         }else if (task===3){
             //Mechs
-            term.clear();
-            term.echo('[[;Red;]ERROR: No Mechs Found]');
-            term.push(function(a){
-               if(a){
-                term.exec("mainMenu")
-               }
-            },{prompt:">"} )
+            mech= await selectFromList(term, "Select Mech",["1. Goblin"])
+            if (mech ===1){
+                term.clear()
+                term.echo(goblinAscii.innerHTML)
+            }
         }else if (task===4){
             // Diagnostics
         }else {term.echo("ERROR")}
