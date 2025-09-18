@@ -5,7 +5,7 @@ $('#terminal').terminal(async function(command, term) {
         //TODO add startup animation
         term.exec("mainMenu", {silent:true})
     }else if (cmd.name === 'mainMenu'){
-        task =await selectFromList(term, "Select Task", ["1. View operations", "2. View remote connections", "3. View Mechs", "4. View diagnostics"]);
+        task =await selectFromList(term, "Select Task", ["1. View operations", "2. View remote connections", "3. View Mechs", "4. View diagnostics"],mainMenuAscii.innerHTML);
         term.echo(task);
         if (task===1){
             //View operations
@@ -21,6 +21,13 @@ $('#terminal').terminal(async function(command, term) {
 `]);
         }else if (task===3){
             //Mechs
+            term.clear();
+            term.echo('[[;Red;]ERROR: No Mechs Found]');
+            term.push(function(a){
+               if(a){term.pop()
+                term.exec("mainMenu", {silent:true})
+               } 
+            })
         }else if (task===4){
             // Diagnostics
         }else {term.echo("ERROR")}
